@@ -31,35 +31,45 @@ function quadrado(){
     }
 }
 
+function moeda (atual){
+return atual.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+}
+
 function calcula(){
     let val = document.getElementById("valor").value;
     let j = document.getElementById("juros").value;
     let t = document.getElementById("meses").value;
-   if (!Number(val)){
-      alert ("O valor deve ser um número.") 
-      document.getElementById("valor").value = "";
-      document.getElementById("valor").focus();
-      return
-   }
-   if (!Number(j)){
-    alert ("O valor deve ser um juros.") 
-    document.getElementById("juros").value = "";
-    document.getElementById("juros").focus();
-    return
- }
- if (!Number(t)){
-    alert ("O valor deve ser um mes.") 
-    document.getElementById("meses").value = "";
-    document.getElementById("meses").focus();
-    return
- }
+     if(!Number(val)){
+alert("O valor deve ser um número.")
+document.getElementById("valor").value = "";
+document.getElementById("valor").focus();
+        return
+     }
+     if(!Number(j)){
+        alert("O valor deve ser um juros.")
+        document.getElementById("juros").value = "";
+        document.getElementById("juros").focus();
+                return
+             }
+             if(!Number(t)){
+                alert("O valor deve ser um mes.")
+                document.getElementById("meses").value = "";
+                document.getElementById("meses").focus();
+                        return
+                     }
+
+
     let res = val;
-    for(let m=1; m <= t; m++){
-        res = val * (1+(j/100));
-        val = res; 
-        document.write("Mes " + m + " = " + res + "<br>")
-    }
-  document.write("Resultado: "+res);
+    let texto = "";
+for(let m=1; m <= t; m++){
+    let res = val * (1+(j/100));
+    val = res;
+    texto += m + ": " + moeda(res) + "<br>";
+    //document.write(" Mes " + " = " + moeda (res) + " <br>");
+}
+document.getElementById("mes").innerHTML= texto;
+document.getElementById("total").innerHTML= "total: " + moeda(res);
+//document.write("Resultado: "+ moeda (res));
 }
 
 function somarNotas(){
@@ -87,4 +97,3 @@ function fecharNotas(){
     r = 180 - r;
     document.getElementById("resultadofechar").innerHTML = "Falta: " + r;
 }
-
